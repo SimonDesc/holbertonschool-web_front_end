@@ -35,13 +35,13 @@
 	--section-title-margin: 0;
 	--section-title-color: var(--color-black);
 
-	/* padding */
-	--section-padding: 5rem 0;
-	--section-header-padding: 0 0 3rem;
-	--section-body-padding: 0 0 3rem;
-	--section-footer-padding: 3rem 0 0;
-	--section-footer-align:center;
-	--footer-padding: 5rem 0 1rem;
+    /* Section padding */
+        --section-padding: 5rem 0;
+        --section-header-padding: 0 0 3rem;
+        --section-body-padding: 0 0 3rem;
+        --section-footer-padding: 3rem 0 0;
+        --section-footer-align: center;
+        --footer-padding: 5rem 0 1rem;
     }
     
     *, *::before, *::after {
@@ -132,32 +132,37 @@
 	font-weight: var(--font-weight-bold);
     }
 
-	.container {
-		width: 960px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.section {
-		padding : var(--section-padding)
-	}
+    .container {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    .section {
+    padding: var(--section-padding);
+    }
 
     /**
      * Set text alignment for section header.
      */
     .section-header {
 	text-align: var(--section-header-align);
-	padding: var(--section-header-padding);
+    padding: var(--section-header-padding);
+    }
+
+    .section-body {
+    padding: var(--section-body-padding);
+    }
+
+    .section-footer{
+    padding: var(--section-footer-padding);
+    text-align: var(--section-footer-align);
+    }
+
+    .footer{
+        padding: var(--footer-padding);
     }
     
-	.section-body {
-		padding: var(--section-body-padding);
-	}
-
-	.section-footer {
-		padding: var(--section-footer-padding);
-		text-align: var(--section-footer-align);
-	}
     /**
      * Set font family, font size, font weight, margin, and color for section title.
      */
@@ -168,8 +173,4 @@
 	margin: var(--section-title-margin);
 	color: var(--section-title-color);
     }
-
-	.footer {
-		padding: var(--footer-padding)
-	}
     
