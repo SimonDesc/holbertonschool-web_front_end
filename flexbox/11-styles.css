@@ -361,6 +361,10 @@ a:active {
 /* Grid
 	  ============================= */
 
+.row {
+	display: flex;
+}
+
 ul.row {
 	margin: -1rem;
 	padding: 0;
@@ -379,12 +383,10 @@ ul.row {
 	width: calc((100% / 2) - 2rem);
 }
 
-.row {
-	display: flex;
-}
-
 /* Navbar
 	  ============================= */
+
+.navbar-menu {}
 
 .nav {
 	display: flex;
@@ -394,16 +396,15 @@ ul.row {
 	text-align: center;
 }
 
-.nav .nav-item + .nav-item {
-    margin: 0 0 0 2rem;
-}
-
 .nav .nav-item {
 	font-family: var(--nav-item-font-family);
 	font-weight: var(--nav-item-font-weight);
 	font-size: var(--nav-item-font-size);
 	letter-spacing: var(--nav-item-letter-spacing);
-	
+}
+
+.nav .nav-item + .nav-item {
+	margin: var(--nav-item-margin);
 }
 
 .nav .nav-link {
@@ -436,17 +437,21 @@ ul.row {
 /* Header
 	  ============================= */
 
-.header-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
 .header {
 	padding: var(--header-padding);
 	position: relative;
 	z-index: 3;
 	background: transparent;
+}
+
+.header-logo {}
+
+.header-logo a {}
+
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 /* Footer
@@ -571,18 +576,17 @@ ul.row {
 	flex-direction: row-reverse;
 }
 
-
 /* Section SERVICES ============================= */
 
 .section-services .row {
 	flex-wrap: wrap;
 }
 
-/* Section ABOUT US */
-.section-about-us [class^="col"] {
+/* Section ABOUT US ============================= */
+
+.section-about-us [class^="col-"] {
 	align-self: center;
 }
-
 
 /*** 4. CARD ***/
 
@@ -710,4 +714,36 @@ ul.row {
 	color: #efeded;
 	font-size: 10rem;
 	z-index: -1;
+}
+
+/*** ARTICLE PAGE ***/
+/* Section HERO (article)
+    ============================= */
+
+.hero-article {
+	background-size: 150rem 100rem;
+	background-position: 50% 0;
+}
+
+.hero-article::before {
+	content: "";
+	background: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 0;
+}
+
+.hero-article .section-inner {
+	text-align: center;
+	align-items: center;
+	min-height: 40vh;
+}
+
+.hero-article .section-body {
+	position: relative;
+	padding: 7rem 0 0;
+	z-index: 2;
 }
