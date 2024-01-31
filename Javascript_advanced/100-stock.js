@@ -24,7 +24,7 @@ function processOrder(itemName, callbackPayment, callbackError) {
 	}
 }
 
-resultat = window.prompt('Please enter the item you would like to purchase (Macbook, iPhone)');
+resultat = prompt('Please enter the item you would like to purchase (Macbook, iPhone)');
 if (!resultat || !(resultat in stock)) {
 	console.log('Saisie incorrecte ou objet inconnu')
 } else {

@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "La Communauté de l'Anneau",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "2",
+      "title": "Les Deux Tours",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "3",
+      "title": "Le Retour du Roi",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "4",
+      "title": "Bilbo le Hobbit",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "6",
+      "title": "L'Anneau Unique",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "7",
+      "title": "Les Nazgûls",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "8",
+      "title": "La Terre du Milieu",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "9",
+      "title": "Sauron",
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "id": "10",
+      "title": "Frodo et Sam",
+      "author": "J.R.R. Tolkien"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "C'est une histoire incroyable !",
+      "postId": 1
+    },
+    {
+      "id": "2",
+      "body": "J'adore les aventures de Frodo et Sam.",
+      "postId": 10
+    }
+  ],
+  "profile": {
+    "name": "Fan de Tolkien"
+  }
+}
