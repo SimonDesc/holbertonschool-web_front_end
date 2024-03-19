@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>Advanced_Cart_System</title>
+	<meta name="description" content="Description of the page less than 150 characters">
+	<script src=" https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js "></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			// Setup list
+			let availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+			// Checking if sessionStorage is available
+			function issessionStorageAvailable() {
+				let test = 'test';
+				try {
+					sessionStorage.setItem(test, test);
+					sessionStorage.removeItem(test);
+					return true;
+				} catch (e) {
+					return false;
+				}
+			}
+			if (!issessionStorageAvailable()) {
+				alert('Sorry, your browser does not support Web storage. Try again with a better one');
+			}
+			else {
+				createStore(availableItems);
+				displayCart();
+
+
+
+				function getCartFromStorage() {
+					// On essaie de récupérer le panier depuis le stockage de session
+					const cart = sessionStorage.getItem('cart');
+
+					// On vérifie si le panier existe
+					if (cart) {
+						// Si oui, on parse le panier (qui est une chaîne de caractères) en objet JSON et on le retourne
+						return JSON.parse(cart);
+					} else {
+						// Si le panier n'existe pas, on retourne un objet vide
+						return {};
+					}
+				};
+
+				function addItemToCart(item) {
+					let cart;
+					if (sessionStorage.getItem('cart')) {
+						cart = JSON.parse(sessionStorage.getItem('cart'))
+					} else {
+						cart = {};
+					}
+
+					if (cart[item]) {
+						cart[item] += 1; // L'article existe déjà, augmenter sa quantité
+					} else {
+						cart[item] = 1; // L'article n'existe pas, l'ajouter avec une quantité de 1
+					}
+					sessionStorage.setItem('cart', JSON.stringify(cart));
+					displayCart();
+					console.log(JSON.parse(sessionStorage.getItem('cart')));
+				}
+
+				function removeItemfromCart(item) {
+					let cart = JSON.parse(sessionStorage.getItem('cart') || '{}');
+					if (item in cart) {
+						delete cart[item];
+						sessionStorage.setItem('cart', JSON.stringify(cart));
+					};
+					displayCart();
+				}
+
+				function clearCart() {
+					sessionStorage.removeItem('cart');
+					displayCart();
+				}
+
+				function createStore(availableItems) {
+					// Création et ajout du titre <h2>
+					const title = document.createElement("h2");
+					title.textContent = "Available products:";
+					document.body.appendChild(title); // Ajoute le titre au corps du document
+
+					// Création d'une liste <ul>
+					const list = document.createElement("ul");
+					list.setAttribute('id', 'productList');
+					document.body.appendChild(list); // Ajoute la liste au corps du document
+
+					// Parcours de la liste des articles disponibles
+					availableItems.forEach((item) => {
+						// Création d'un élément <li>
+						let listItem = document.createElement('li');
+						listItem.textContent = item; // Ajout du nom de l'article comme texte de l'élément <li>
+						listItem.style.cursor = 'pointer'; // Change le curseur pour indiquer que l'élément est cliquable
+
+						// Ajout d'un écouteur d'événements pour gérer le clic sur un article
+						listItem.addEventListener('click', () => {
+							addItemToCart(item);
+							displayCart();
+						});
+						// Ajoute l'élément <li> à la liste <ul>
+						list.appendChild(listItem);
+					});
+				};
+
+				function displayCart() {
+					// Vérifie si le titre "Your cart:" existe déjà pour éviter de le dupliquer
+					if (!document.querySelector("h2#cartTitle")) {
+						const title = document.createElement("h2");
+						title.textContent = "Your cart:";
+						title.id = "cartTitle"; // Ajoute un identifiant
+						document.body.appendChild(title);
+					}
+
+					// Vérifie si le divTag existe déjà
+					let divTag = document.getElementById("divTag");
+					if (!divTag) {
+						// S'il n'existe pas, le créer et l'ajouter au document
+						divTag = document.createElement("div");
+						divTag.id = "divTag";
+						document.body.appendChild(divTag);
+					} else {
+						// S'il existe déjà, supprime tous les enfants de type <ul> ou <ol>
+						let existingList = divTag.querySelector("ul");
+						if (existingList) {
+							divTag.removeChild(existingList);
+						}
+					}
+
+					updateCart();
+				};
+
+				function updateCart() {
+					const divTag = document.getElementById("divTag");
+					divTag.innerHTML = '';
+
+					// Crée un bouton pour vider le panier
+					const clearButton = document.createElement("button");
+					clearButton.textContent = "Clear my cart";
+					clearButton.onclick = function () { clearCart(); };
+					divTag.appendChild(clearButton);
+
+					// Récupère le panier depuis le stockage de session
+					const cart = JSON.parse(sessionStorage.getItem('cart') || '{}');
+					const items = Object.keys(cart);
+
+					// Crée une liste pour les articles du panier
+					const list = document.createElement("ul");
+
+					if (items.length === 0) {
+						// Si le panier est vide
+						let listItem = document.createElement('li');
+						listItem.textContent = "Your cart is empty";
+						list.appendChild(listItem);
+					} else {
+						// Si le panier n'est pas vide, affiche chaque article avec sa quantité
+						items.forEach(item => {
+							let listItem = document.createElement('li');
+							listItem.textContent = `${item} x ${cart[item]} `;
+
+							// Ajoute un bouton de suppression à côté de chaque article
+							const removeButton = document.createElement("button");
+							removeButton.textContent = "remove";
+							removeButton.onclick = function () { removeItemfromCart(item); };
+							listItem.appendChild(removeButton);
+
+							list.appendChild(listItem);
+						});
+					}
+
+					divTag.appendChild(list); // Ajoute la liste au div
+				};
+
+			};
+
+		});
+	</script>
+</head>
+
+<body>
+	<main>
+	</main>
+	<footer>
+	</footer>
+</body>
+
+</html>
